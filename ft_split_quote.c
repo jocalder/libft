@@ -56,19 +56,23 @@ static char	**array(char **aux, char const *s, char c)
 		while (s[i] == c && s[i])
 			i++;
 		j = i;
-		while (s[i] && s[i] != c && s[i] != 39)
-			i++;
 		if (s[i] == 39)
 		{
-			j = i;
+			j = i + 1;
 			i++;
 			while (s[i] && s[i] != 39)
 				i++;
+			aux[idx] = ft_substr(s, j, (i - j));
 			i++;
+		}
+		else
+		{
+			while (s[i] && s[i] != c && s[i] != 39)
+				i++;
+			aux[idx] = ft_substr(s, j, (i - j));
 		}
 		if (i > j)
 		{
-			aux[idx] = ft_substr(s, j, (i - j));
 			if (!aux[idx])
 				return (free_array_split(aux, idx));
 			idx++;
